@@ -7,22 +7,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="northwind.css">
-  <link rel="stylesheet" href="ntc-unmapped.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/northwind.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/ntc-unmapped.css">
 </head>
 <body>
 <main class="ntc-page ntc-page--contact" data-build-manifest="1440,768,375" data-ntc-page="contact">
   <header class="tcm-nav" data-tcm-widget="tcm-nav">
     <div class="tcm-nav__inner">
-      <a class="tcm-nav__wordmark" href="index.html">NORTHWIND</a>
+      <a class="tcm-nav__wordmark" href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/index.html">NORTHWIND</a>
       <nav class="tcm-nav__links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/index.html">Home</a>
+        <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/services.html">Services</a>
+        <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/about.html">About</a>
+        <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/faq.html">FAQ</a>
+        <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/contact.html">Contact</a>
       </nav>
-      <a class="tcm-btn tcm-btn--primary" href="contact.html">Book a demo</a>
+      <a class="tcm-btn tcm-btn--primary" href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/contact.html">Book a demo</a>
     </div>
   </header>
   <section class="tcm-hero" data-tcm-widget="tcm-hero" id="tcm-hero">
@@ -32,8 +32,8 @@
         <h1 class="tcm-hero__heading">Tell us the part. We will tell you what is in stock.</h1>
         <p class="tcm-hero__copy">Send the request. You get a name on the first reply. That person owns the job until it is closed.</p>
         <div class="tcm-hero__ctas">
-          <a class="tcm-btn tcm-btn--primary" href="contact.html">Book a demo</a>
-          <a class="tcm-btn tcm-btn--secondary" href="index.html">Get a homepage example</a>
+          <a class="tcm-btn tcm-btn--primary" href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/contact.html">Book a demo</a>
+          <a class="tcm-btn tcm-btn--secondary" href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/index.html">Get a homepage example</a>
         </div>
       </div>
       <figure class="tcm-hero__media">
@@ -68,16 +68,32 @@
   </section>
   <footer class="tcm-footer" data-tcm-widget="tcm-footer">
     <nav class="tcm-footer__links" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Contact</a>
+      <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/index.html">Home</a>
+      <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/services.html">Services</a>
+      <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/about.html">About</a>
+      <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/faq.html">FAQ</a>
+      <a href="https://htmlpreview.github.io/?https://github.com/TheCreativeMomentum/northwind-test-co-preview/blob/main/contact.html">Contact</a>
     </nav>
     <p class="tcm-footer__email">Contact: <a href="mailto:parts@northwindtest.co">parts@northwindtest.co</a></p>
     <p class="tcm-footer__copy">Northwind Test Co · B2B industrial supplies · Invented-for-test</p>
   </footer>
 </main>
-<script src="lead-raster-loader.js"></script>
+<script>
+(function () {
+  var BASE = 'https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/';
+  document.querySelectorAll('.tcm-cta__form').forEach(function (form) {
+    form.addEventListener('submit', function (event) { event.preventDefault(); });
+  });
+  document.querySelectorAll('img').forEach(function (img) {
+    var src = img.getAttribute('src') || '';
+    if (src.indexOf('images/') !== 0) return;
+    fetch(BASE + src.replace(/\.png$/i, '.jpg.b64')).then(function (r) {
+      return r.ok ? r.text() : Promise.reject();
+    }).then(function (text) {
+      img.src = 'data:image/jpeg;base64,' + String(text).replace(/\s+/g, '');
+    }).catch(function () {});
+  });
+})();
+</script>
 </body>
 </html>
