@@ -7,8 +7,783 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/northwind.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/ntc-unmapped.css">
+  <style>
+/* Northwind Test Co — tokens from Lead.NorthwindTestCo build-spec.json */
+:root {
+  --nw-ink: #0b1f33;
+  --nw-steel: #1c3a57;
+  --nw-paper: #f4f1ea;
+  --nw-safety: #e85d04;
+  --nw-signal: #f6c445;
+  --nw-fog: #d7dee6;
+  --nw-success: #2a6f4e;
+  --nw-white: #ffffff;
+  --nw-section-pad-y: 40px;
+  --nw-section-pad-x: 20px;
+  --nw-card-pad: 24px;
+  --nw-stack: 16px;
+  --nw-font: Inter, system-ui, -apple-system, sans-serif;
+  --nw-radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--nw-font);
+  color: var(--nw-ink);
+  background: var(--nw-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+blockquote,
+figure {
+  margin: 0;
+}
+
+.ntc-home {
+  width: 100%;
+}
+
+.tcm-eyebrow {
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 18px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--nw-safety);
+}
+
+.tcm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  border-radius: var(--nw-radius);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  background: none;
+}
+
+.tcm-btn--primary {
+  background: var(--nw-safety);
+  color: var(--nw-white);
+  border-color: var(--nw-safety);
+}
+
+.tcm-btn--secondary {
+  background: var(--nw-white);
+  color: var(--nw-ink);
+  border-color: var(--nw-ink);
+}
+
+.tcm-btn--block {
+  width: 100%;
+}
+
+.tcm-card {
+  background: var(--nw-white);
+  border: 1px solid var(--nw-fog);
+}
+
+/* --- tcm-nav --- */
+.tcm-nav {
+  background: var(--nw-ink);
+  color: var(--nw-white);
+}
+
+/* 375/768: two-row Figma nav — wordmark + Book a demo, then IA links. No hamburger. */
+.tcm-nav__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "wordmark cta"
+    "links links";
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 12px;
+  padding: 20px;
+  min-height: 80px;
+}
+
+.tcm-nav__wordmark {
+  grid-area: wordmark;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--nw-white);
+  white-space: nowrap;
+}
+
+.tcm-nav__links {
+  grid-area: links;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.tcm-nav__inner > .tcm-btn {
+  grid-area: cta;
+  width: auto;
+}
+
+.tcm-nav__links a {
+  color: inherit;
+}
+
+/* --- tcm-hero --- */
+/* Copy and photo are siblings — never overlaid. Mobile: photo above copy. */
+.tcm-hero {
+  background: var(--nw-ink);
+  color: var(--nw-white);
+}
+
+.tcm-hero__inner {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: var(--nw-stack);
+  padding: 40px 20px;
+}
+
+.tcm-hero__copy-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nw-stack);
+  width: 100%;
+  min-width: 0;
+}
+
+.tcm-hero__media {
+  width: 100%;
+  height: 180px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--nw-steel);
+}
+
+.tcm-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tcm-hero__heading {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--nw-white);
+}
+
+.tcm-hero__copy {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--nw-paper);
+}
+
+.tcm-hero__ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.tcm-hero__ctas .tcm-btn {
+  width: 100%;
+}
+
+/* --- tcm-about --- */
+.tcm-about {
+  background: var(--nw-white);
+}
+
+.tcm-about__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nw-stack);
+  padding: 40px 20px;
+}
+
+.tcm-about__heading {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--nw-ink);
+  width: 100%;
+}
+
+.tcm-about__photo {
+  width: 100%;
+  max-width: 400px;
+  height: 160px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.tcm-about__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tcm-about__sub {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--nw-steel);
+}
+
+.tcm-about__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.tcm-about__card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 24px;
+  background: var(--nw-paper);
+}
+
+.tcm-about__quote {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--nw-ink);
+}
+
+.tcm-about__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tcm-about__name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--nw-ink);
+}
+
+.tcm-about__role,
+.tcm-about__company {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--nw-steel);
+}
+
+/* --- tcm-assets --- */
+.tcm-assets {
+  background: var(--nw-paper);
+}
+
+.tcm-assets__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nw-stack);
+  padding: 40px 20px;
+}
+
+.tcm-assets__heading {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--nw-ink);
+}
+
+.tcm-assets__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.tcm-assets__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--nw-white);
+}
+
+.tcm-assets__photo {
+  width: 220px;
+  max-width: 100%;
+  height: 132px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.tcm-assets__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tcm-assets__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--nw-ink);
+}
+
+.tcm-assets__body {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--nw-steel);
+}
+
+/* --- tcm-cta --- */
+.tcm-cta {
+  background: var(--nw-ink);
+  color: var(--nw-white);
+}
+
+.tcm-cta__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 20px;
+}
+
+.tcm-cta__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nw-stack);
+}
+
+.tcm-cta__heading {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--nw-white);
+}
+
+.tcm-cta__sub {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--nw-paper);
+}
+
+.tcm-cta__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--nw-white);
+  padding: 16px;
+  color: var(--nw-ink);
+}
+
+.tcm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tcm-field__label {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--nw-ink);
+}
+
+.tcm-field__input {
+  width: 100%;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid var(--nw-fog);
+  background: var(--nw-paper);
+  color: var(--nw-ink);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.tcm-field__input--area {
+  height: 72px;
+  resize: vertical;
+}
+
+.tcm-field__input::placeholder {
+  color: var(--nw-steel);
+}
+
+.tcm-cta__note {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--nw-steel);
+}
+
+/* --- tcm-footer --- */
+.tcm-footer {
+  background: var(--nw-ink);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px 20px;
+}
+
+.tcm-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.tcm-footer__links a,
+.tcm-footer__email a {
+  color: var(--nw-paper);
+}
+
+.tcm-footer__email {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--nw-paper);
+}
+
+.tcm-footer__copy {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--nw-paper);
+}
+
+/* Handshake tablet 768 — still stacked; photo stays above copy */
+@media (min-width: 768px) {
+  .tcm-about__heading {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .tcm-hero__ctas .tcm-btn,
+  .tcm-nav .tcm-btn {
+    width: auto;
+  }
+
+  .tcm-hero__media {
+    max-width: 323px;
+  }
+}
+
+/* Handshake desktop 1440 — two-column hero, copy left / photo right, no overlap */
+@media (min-width: 1440px) {
+  .tcm-nav {
+    background: var(--nw-white);
+    color: var(--nw-ink);
+  }
+
+  .tcm-nav__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: "wordmark links cta";
+    align-items: center;
+    padding: 20px 80px;
+  }
+
+  .tcm-nav__wordmark {
+    color: var(--nw-ink);
+  }
+
+  .tcm-nav__links {
+    justify-content: center;
+  }
+
+  .tcm-nav__inner > .tcm-btn {
+    justify-self: end;
+  }
+
+  .tcm-footer {
+    padding: 24px 80px;
+  }
+
+  .tcm-hero {
+    background: var(--nw-white);
+    color: var(--nw-ink);
+  }
+
+  .tcm-hero__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    padding: 48px 80px;
+  }
+
+  .tcm-hero__copy-col {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .tcm-hero__media {
+    width: 520px;
+    max-width: 520px;
+    height: 320px;
+  }
+
+  .tcm-eyebrow {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .tcm-hero__heading {
+    font-size: 48px;
+    line-height: 55px;
+    color: var(--nw-ink);
+    max-width: 20ch;
+  }
+
+  .tcm-hero__copy {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--nw-steel);
+    max-width: 40em;
+  }
+
+  .tcm-hero__ctas {
+    flex-direction: row;
+    gap: 12px;
+    width: auto;
+  }
+
+  .tcm-hero__ctas .tcm-btn {
+    width: auto;
+  }
+
+  /* Proof: warehouse photo LEFT of the three quote cards */
+  .tcm-about__inner {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-areas:
+      "heading heading"
+      "sub sub"
+      "photo cards";
+    align-items: start;
+    column-gap: 24px;
+    row-gap: 20px;
+    padding: 40px 80px;
+  }
+
+  .tcm-about__heading {
+    grid-area: heading;
+  }
+
+  .tcm-about__sub {
+    grid-area: sub;
+  }
+
+  .tcm-about__photo {
+    grid-area: photo;
+    width: 400px;
+    max-width: 400px;
+    height: 160px;
+  }
+
+  .tcm-about__cards {
+    grid-area: cards;
+    flex-direction: row;
+    gap: 24px;
+    width: auto;
+    min-width: 0;
+  }
+
+  .tcm-about__card {
+    flex: 1;
+    background: var(--nw-white);
+  }
+
+  .tcm-assets__inner {
+    padding: 80px;
+    gap: 24px;
+  }
+
+  .tcm-assets__heading {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .tcm-assets__cards {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .tcm-assets__card {
+    flex: 1;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .tcm-assets__title {
+    font-size: 22px;
+  }
+
+  .tcm-assets__body {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .tcm-cta__inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 64px;
+    padding: 96px 80px;
+  }
+
+  .tcm-cta__copy,
+  .tcm-cta__form {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tcm-cta__heading {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+
+  .tcm-cta__sub {
+    font-size: 18px;
+  }
+
+  .tcm-cta__form {
+    padding: 32px;
+    gap: 16px;
+  }
+
+  .tcm-field {
+    gap: 6px;
+  }
+
+  .tcm-field__label {
+    font-size: 13px;
+  }
+
+  .tcm-field__input {
+    height: 44px;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .tcm-field__input--area {
+    height: 88px;
+  }
+
+  .tcm-cta__note {
+    font-size: 12px;
+  }
+}
+
+.ntc-page, .ntc-home { width: 100%; }
+
+/* Unmapped FAQ body — not a catalog widget. Tokens from Lead build-spec. */
+.ntc-faq {
+  background: var(--nw-paper);
+}
+
+.ntc-faq__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 40px 20px;
+}
+
+.ntc-faq__heading {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--nw-ink);
+}
+
+.ntc-faq__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--nw-white);
+}
+
+.ntc-faq__q {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  color: var(--nw-ink);
+  margin: 0;
+}
+
+.ntc-faq__a {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--nw-steel);
+}
+
+@media (min-width: 1440px) {
+  .ntc-faq__inner {
+    padding: 80px;
+  }
+
+  .ntc-faq__heading {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+
+  .ntc-faq__item {
+    padding: 24px;
+  }
+
+  .ntc-faq__q {
+    font-size: 20px;
+  }
+
+  .ntc-faq__a {
+    font-size: 16px;
+  }
+}
+
+</style>
 </head>
 <body>
 <main class="ntc-page ntc-page--services" data-build-manifest="1440,768,375" data-ntc-page="services">
@@ -37,7 +812,7 @@
         </div>
       </div>
       <figure class="tcm-hero__media">
-        <img src="images/hero-warehouse.png" alt="Warehouse aisle with industrial motors and parts on the shelf" width="520" height="320">
+        <img src="https://iili.io/nHEPRPj.png" alt="Warehouse aisle with industrial motors and parts on the shelf" width="520" height="320">
       </figure>
     </div>
   </section>
@@ -48,21 +823,21 @@
       <div class="tcm-assets__cards">
         <article class="tcm-card tcm-assets__card">
           <figure class="tcm-assets__photo">
-            <img src="images/parts-stock.png" alt="Industrial motors and parts staged on warehouse shelves" width="220" height="132">
+            <img src="https://iili.io/nHEP4ff.png" alt="Industrial motors and parts staged on warehouse shelves" width="220" height="132">
           </figure>
           <h3 class="tcm-assets__title">Parts in stock</h3>
           <p class="tcm-assets__body">Common industrial parts on the shelf, staged before we promise a window. If it isn't in stock, we say so up front — we don't hide lead time in the fine print.</p>
         </article>
         <article class="tcm-card tcm-assets__card">
           <figure class="tcm-assets__photo">
-            <img src="images/service-bench.png" alt="Technician servicing an industrial motor at the bench" width="220" height="132">
+            <img src="https://iili.io/nHEPsJ2.png" alt="Technician servicing an industrial motor at the bench" width="220" height="132">
           </figure>
           <h3 class="tcm-assets__title">Service without the runaround</h3>
           <p class="tcm-assets__body">One job, one path. You don't bounce from sales to dispatch to a vendor who doesn't have that account. We own the work until it's done.</p>
         </article>
         <article class="tcm-card tcm-assets__card">
           <figure class="tcm-assets__photo">
-            <img src="images/accountable-desk.png" alt="Operations desk with a warehouse floor in view" width="220" height="132">
+            <img src="https://iili.io/nHEPZb9.png" alt="Operations desk with a warehouse floor in view" width="220" height="132">
           </figure>
           <h3 class="tcm-assets__title">One accountable contact</h3>
           <p class="tcm-assets__body">A named person who knows your order. Email them. Call them. They don't hand you a ticket number and disappear.</p>
@@ -110,21 +885,19 @@
 
 <script>
 (function () {
-  var BASE = 'https://cdn.jsdelivr.net/gh/TheCreativeMomentum/northwind-test-co-preview@main/';
+  var MAP = {"hero-warehouse.png": "https://iili.io/nHEPRPj.png", "parts-stock.png": "https://iili.io/nHEP4ff.png", "service-bench.png": "https://iili.io/nHEPsJ2.png", "accountable-desk.png": "https://iili.io/nHEPZb9.png"};
   document.querySelectorAll(".tcm-cta__form").forEach(function (form) {
     form.addEventListener("submit", function (event) { event.preventDefault(); });
   });
   document.querySelectorAll("img").forEach(function (img) {
     var src = img.getAttribute("src") || "";
-    if (src.indexOf("images/") !== 0) return;
-    fetch(BASE + src.replace(/\.png$/i, ".jpg.b64")).then(function (r) {
-      return r.ok ? r.text() : Promise.reject();
-    }).then(function (text) {
-      img.src = "data:image/jpeg;base64," + String(text).replace(/\s+/g, "");
-    }).catch(function () {});
+    var file = src.split("/").pop().split("?")[0];
+    if (MAP[file]) img.src = MAP[file];
+    Object.keys(MAP).forEach(function (name) {
+      if (src.indexOf(name) !== -1) img.src = MAP[name];
+    });
   });
 })();
 </script>
-
 </body>
 </html>
